@@ -1,4 +1,4 @@
-function getStudents() {
+function getSts() {
   var students = $("textarea#students").val();
   console.log(students.split(",")); 
 }
