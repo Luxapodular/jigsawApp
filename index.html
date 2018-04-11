@@ -12,9 +12,13 @@
   
   <body>
     <div class="section">
-      <div class="box-title">Benjamins</div>
-      <input class="info-input" type="text" placeholder="Name">
-      <input class="info-input" type="text" placeholder="Lexile">
+      <div id="studentInputBoxes">
+        <div class="box-title">Students</div>
+      <input id="studentNameInput" class="info-input" type="text" placeholder="Name">
+      <input id="studentLexileInput" class="info-input" type="text" placeholder="Lexile">
+        <button id="add-student-button" type="button" onclick="addStudent()">Add Student</button>
+        </div>
+        <div id="student-list"></div>
     </div>
     
     <div class="section">
