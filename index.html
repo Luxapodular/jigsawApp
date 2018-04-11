@@ -2,7 +2,7 @@
 <html>
   
   <head>
-    <link rel="stylesheet" src="styles/styles.css"/>
+    <link rel="stylesheet" type="text/css" href="styles/styles.css"/>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     
@@ -11,10 +11,26 @@
   </head>
   
   <body>
-    Here is my content.
+    <div class="section">
+      <div class="box-title">Students</div>
+      <input class="info-input" type="text" placeholder="Name">
+      <input class="info-input" type="text" placeholder="Lexile">
+    </div>
+    
+    <div class="section">
+      <div class="box-title">Subgroups</div>
+      <div class="subgroup-container">
+        <div class="subgroup-title">Content Area 1</div>
+        <input class="info-input" type="text" placeholder="Content">
+        <input class="info-input" type="text" placeholder="Lexile">
+      </div>
+    </div>
+    <br> 
+<!--
     <textarea id="students" placeholder="students"></textarea>
     <textarea id="subgroups" placeholder="subgroups"></textarea>
     <textarea id="content" placeholder="content"></textarea>
+-->
   </body>
 
 </html>
