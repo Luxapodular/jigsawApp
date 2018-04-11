@@ -19,20 +19,22 @@ function addStudent() {
     console.log(studentLexileValue);
     myDiv=document.getElementById("student-list");
     myDiv.innerHTML=nameInputValue+": "+studentLexileValue
+    $('#studentNameInput').val('');
+    $('#studentLexileInput').val('');
     
     //create new student name input box
-    var newStudentNameInput = document.createElement("input");
-    newStudentNameInput.setAttribute("type", "text");
-    newStudentNameInput.setAttribute("placeholder", "Name");
-    var studentInputBoxes = document.getElementById("studentInputBoxes")
-    studentInputBoxes.appendChild(document.createElement("br"));
-    $("#studentInputBoxes").append(newStudentNameInput);
+    //var newStudentNameInput = document.createElement("input");
+    //newStudentNameInput.setAttribute("type", "text");
+    //newStudentNameInput.setAttribute("placeholder", "Name");
+    //var studentInputBoxes = document.getElementById("studentInputBoxes")
+    //studentInputBoxes.appendChild(document.createElement("br"));
+    //$("#studentInputBoxes").append(newStudentNameInput);
     
     //create new student lexile input box
-    var newStudentLexileInput = document.createElement("input");
-    newStudentLexileInput.setAttribute("type", "text");
-    newStudentLexileInput.setAttribute("placeholder", "Lexile");
-    $("#studentInputBoxes").append(newStudentLexileInput);
+    //var newStudentLexileInput = document.createElement("input");
+    //newStudentLexileInput.setAttribute("type", "text");
+    //newStudentLexileInput.setAttribute("placeholder", "Lexile");
+    //$("#studentInputBoxes").append(newStudentLexileInput);
     
     
 
