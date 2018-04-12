@@ -1,3 +1,6 @@
+students = [{'name': student1, 'readingLevel':G},{'name': student2, 'readingLevel': B}, {'name': student3, 'readingLevel':K}, {'name': student4, 'readingLevel':T}, {'name': student5, 'readingLevel':A}, {'name': student6, 'readingLevel':R}, {'name': student7, 'readingLevel':L}, {'name': student8, 'readingLevel':P}, {'name': student9, 'readingLevel':F}, {'name': student10, 'readingLevel':Q}, {'name': student11, 'readingLevel':G}, {'name': student12, 'readingLevel':K}, {'name': student13, 'readingLevel':A}, {'name': student14, 'readingLevel':V}, {'name': student15, 'readingLevel':E}]
+
+
 function getStudentsAlternate() {
   var students = $("textarea#students").val();
 
