@@ -1,4 +1,5 @@
 var numSubgroups = 1;
+var numContent = 1; 
 
 function getStudents() {
   var students = $("textarea#students").val();
@@ -30,17 +31,28 @@ function addContent(obj) {
     return;
   }
   
-  var contentDiv = document.createElement('div'); 
+  var contentDiv = document.createElement('div');
+  contentDiv.id = "content-div-" + numContent; 
   contentDiv.className = "content-div"; 
   contentDiv.innerHTML = name + ":" + level; 
   
   var delButton = document.createElement('button'); 
+  delButton.id = "content-delete-button-" + numContent;
   delButton.className="content-delete-button";
+  delButton.onclick = deleteContent; 
   contentDiv.appendChild(delButton); 
+
   
   $("#"+containerId).append(contentDiv); 
 
   console.log(name+":"+level); 
+}
+
+function deleteContent(event) {
+  srcId = event.srcElement.id; 
+  contentId = srcId.replace("content-delete-button", "content-div"); 
+  content = document.getElementById(contentId);
+  content.parentNode.removeChild(content); 
 }
 
 function addExpertGroup(obj) {
