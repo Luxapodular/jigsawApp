@@ -18,7 +18,8 @@ function addStudent() {
     var studentLexileValue = studentLexileInput.value;
     console.log(studentLexileValue);
     myDiv=document.getElementById("student-list");
-    myDiv.innerHTML=nameInputValue+": "+studentLexileValue
+    myDiv.innerText=myDiv.innerText + " " + nameInputValue+": "+studentLexileValue
+    //    myDiv.appendChild(document.createTextNode(NameInputValue));
     $('#studentNameInput').val('');
     $('#studentLexileInput').val('');
     
