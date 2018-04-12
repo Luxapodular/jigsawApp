@@ -40,7 +40,6 @@ function addStudent() {
         }
         
         obj={
-      
             'name' : nameInputValue,
             'lexile': studentLexileValue,
         }
