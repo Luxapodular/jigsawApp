@@ -3,13 +3,11 @@ var numContent = 1;
 
 function getStudents() {
   var students = $("textarea#students").val();
-  console.log(students.split(",")); 
 }
 
 function addContent(obj) {
   callerId = obj.id; 
 
-  console.log(obj);
   nameId = callerId.replace("content-add-button", "content-name-input");
   levelId = callerId.replace("content-add-button", "content-level-input");
   containerId = callerId.replace("content-add-button", "content-container");
@@ -39,13 +37,15 @@ function addContent(obj) {
   var delButton = document.createElement('button'); 
   delButton.id = "content-delete-button-" + numContent;
   delButton.className="content-delete-button";
+  delButton.innerHTML = "-"
   delButton.onclick = deleteContent; 
   contentDiv.appendChild(delButton); 
 
   
   $("#"+containerId).append(contentDiv); 
+  
+  numContent += 1; 
 
-  console.log(name+":"+level); 
 }
 
 function deleteContent(event) {
@@ -78,7 +78,5 @@ function addExpertGroup(obj) {
   numSubgroups += 1;
   
   document.getElementById("expertGroup-section").innerHTML += expertGroupHTML; 
-  
-  console.log(expertGroupName);
   
 }

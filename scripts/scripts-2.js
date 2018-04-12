@@ -9,6 +9,7 @@ function getStudentsAlternate() {
   }
 }
 
+studentNum = 1; 
 function addStudent() {
    console.log("hello")
    var nameInput = document.getElementById("studentNameInput");
@@ -24,7 +25,7 @@ function addStudent() {
         //myDiv.innerText=myDiv.innerText + " " + nameInputValue+": "+studentLexileValue 
         
         var studentDiv = document.createElement('div');
-        studentDiv.id="student"
+        studentDiv.id="student-div-"+studentNum
         studentDiv.className = "student-div";
         studentDiv.innerHTML = nameInputValue + ": " + studentLexileValue;
         console.log(studentDiv);
@@ -32,40 +33,23 @@ function addStudent() {
         console.log(studentList);
         
         var delButton = document.createElement('button');
+        delButton.id = "student-delete-button-" + studentNum; 
         delButton.className="content-delete-button";
         studentDiv.appendChild(delButton);
-        delButton.onclick=function(){
-            var element = document.getElementById("student");
-            element.parentNode.removeChild(element);
-        }
-        
-        obj={
-            'name' : nameInputValue,
-            'lexile': studentLexileValue,
-        }
-        console.log(obj.name)
+        delButton.onclick= deleteStudent; 
+      
+        studentNum += 1; 
         
     }
 
-    //    myDiv.appendChild(document.createTextNode(NameInputValue));
     $('#studentNameInput').val('');
     $('#studentLexileInput').val('');
     
-    //create new student name input box
-    //var newStudentNameInput = document.createElement("input");
-    //newStudentNameInput.setAttribute("type", "text");
-    //newStudentNameInput.setAttribute("placeholder", "Name");
-    //var studentInputBoxes = document.getElementById("studentInputBoxes")
-    //studentInputBoxes.appendChild(document.createElement("br"));
-    //$("#studentInputBoxes").append(newStudentNameInput);
-    
-    //create new student lexile input box
-    //var newStudentLexileInput = document.createElement("input");
-    //newStudentLexileInput.setAttribute("type", "text");
-    //newStudentLexileInput.setAttribute("placeholder", "Lexile");
-    //$("#studentInputBoxes").append(newStudentLexileInput);
-    
-    
-
 }
  
+function deleteStudent(event) {
+  srcId = event.srcElement.id; 
+  contentId = srcId.replace("student-delete-button", "student-div"); 
+  content = document.getElementById(contentId);
+  content.parentNode.removeChild(content); 
+}
