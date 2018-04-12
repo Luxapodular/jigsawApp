@@ -8,6 +8,7 @@ function getStudents() {
 function addContent(obj) {
   callerId = obj.id; 
 
+  console.log(obj);
   nameId = callerId.replace("content-add-button", "content-name-input");
   levelId = callerId.replace("content-add-button", "content-level-input");
   containerId = callerId.replace("content-add-button", "content-container");
@@ -18,6 +19,16 @@ function addContent(obj) {
 
   var name = $("#"+nameId).val(); 
   var level = $("#"+levelId).val(); 
+
+  if (name === "") {
+    alert("Please enter a name for your content!"); 
+    return; 
+  }
+  
+  if (level === "") {
+    alert("Please enter a level for your content!"); 
+    return;
+  }
   
   var contentDiv = document.createElement('div'); 
   contentDiv.className = "content-div"; 
@@ -30,4 +41,32 @@ function addContent(obj) {
   $("#"+containerId).append(contentDiv); 
 
   console.log(name+":"+level); 
+}
+
+function addExpertGroup(obj) {
+  expertGroupName = $("#expertGroup-name-input").val();
+  
+  if (expertGroupName === "") {
+    alert("Please enter a name for the expert group!");
+    return; 
+  }
+  
+  var expertGroupHTML = ` 
+      <div class="expertGroup-container">
+        <div class="expertGroup-title"><EXPERT_GROUP_TITLE></div>
+        <input id="content-name-input-<GROUP_NUMBER>"class="info-input" type="text" placeholder="Content">
+        <input id="content-level-input-<GROUP_NUMBER>" class="info-input" type="text" placeholder="Lexile">
+        <button id="content-add-button-<GROUP_NUMBER>" type="button" onclick="addContent(this);">Add Content</button>
+        <div id="content-container-<GROUP_NUMBER>"></div>
+      </div>`
+  
+  var expertGroupHTML = expertGroupHTML.replace("<EXPERT_GROUP_TITLE>", expertGroupName); 
+  var expertGroupHTML = expertGroupHTML.replace(/<GROUP_NUMBER>/g, String(numSubgroups)); 
+  
+  numSubgroups += 1;
+  
+  document.getElementById("expertGroup-section").innerHTML += expertGroupHTML; 
+  
+  console.log(expertGroupName);
+  
 }
