@@ -17,8 +17,37 @@ function addStudent() {
    var studentLexileInput = document.getElementById("studentLexileInput");
     var studentLexileValue = studentLexileInput.value;
     console.log(studentLexileValue);
-    myDiv=document.getElementById("student-list");
-    myDiv.innerText=myDiv.innerText + " " + nameInputValue+": "+studentLexileValue
+    if (nameInputValue == "") {
+        alert("Please enter a Student")
+    } else {
+        studentList=document.getElementById("student-list");
+        //myDiv.innerText=myDiv.innerText + " " + nameInputValue+": "+studentLexileValue 
+        
+        var studentDiv = document.createElement('div');
+        studentDiv.id="student"
+        studentDiv.className = "student-div";
+        studentDiv.innerHTML = nameInputValue + ": " + studentLexileValue;
+        console.log(studentDiv);
+        studentList.appendChild(studentDiv);
+        console.log(studentList);
+        
+        var delButton = document.createElement('button');
+        delButton.className="content-delete-button";
+        studentDiv.appendChild(delButton);
+        delButton.onclick=function(){
+            var element = document.getElementById("student");
+            element.parentNode.removeChild(element);
+        }
+        
+        obj={
+      
+            'name' : nameInputValue,
+            'lexile': studentLexileValue,
+        }
+        console.log(obj.name)
+        
+    }
+
     //    myDiv.appendChild(document.createTextNode(NameInputValue));
     $('#studentNameInput').val('');
     $('#studentLexileInput').val('');
