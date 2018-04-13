@@ -27,6 +27,11 @@ function addContent(obj) {
   if (level === "") {
     alert("Please enter a level for your content!"); 
     return;
+  } 
+  
+  if (!String(level).matches("[0-9+]")) {
+    alert("Levels can only be numbers! [0-1300]"); 
+    return;
   }
   
   var contentDiv = document.createElement('div');

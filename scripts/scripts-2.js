@@ -22,8 +22,7 @@ function addStudent() {
         alert("Please enter a Student")
     } else {
         studentList=document.getElementById("student-list");
-        //myDiv.innerText=myDiv.innerText + " " + nameInputValue+": "+studentLexileValue 
-        
+      
         var studentDiv = document.createElement('div');
         studentDiv.id="student-div-"+studentNum
         studentDiv.className = "student-div";
