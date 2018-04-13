@@ -182,7 +182,9 @@ function startSorting() {
 function displayGroups(obj) {
   var groups = obj.groups; 
   var studentGroups = obj.studentGroups;
-  document.getElementById("group-container").innerHTML = "Sorted Expert Groups";
+  document.getElementById("group-container-children").innerHTML = "";
+  document.getElementById("group-container-title").innerHTML = "Sorted Expert Groups";
+
   
   
   studentGroups.forEach(function (group) {
@@ -215,6 +217,6 @@ function displayGroups(obj) {
       }
       sList.appendChild(sBullet); 
     });
-    document.getElementById("group-container").appendChild(sList); 
+    document.getElementById("group-container-children").appendChild(sList); 
   }); 
 }

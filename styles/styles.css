@@ -45,3 +45,29 @@
   font-size: 14px;
   font-weight: bold;
 }
+
+.expertGroup-title {
+  font-size: 18px;
+}
+
+.info-input {
+  margin-left: 10px;
+  border-radius: 4px;
+  height: 20px;
+}
+
+.input-button {
+  height: 30px; 
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.student-div {
+  margin-left:10px;
+  padding:6px;
+  padding-top:2px;
+}
+
+.content-delete-button {
+  margin-left: 6px;
+}
