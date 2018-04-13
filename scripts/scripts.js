@@ -74,7 +74,7 @@ function addExpertGroup(obj) {
         <input id="content-name-input-<GROUP_NUMBER>"class="info-input" type="text" placeholder="Content">
         <input id="content-level-input-<GROUP_NUMBER>" class="info-input" type="text" placeholder="Lexile">
         <button id="content-add-button-<GROUP_NUMBER>" type="button" onclick="addContent(this);">Add Content</button>
-        <div id="content-container-<GROUP_NUMBER>"></div>
+        <div id="content-container-<GROUP_NUMBER>" class="expert-content-container"></div>
       </div>`
   
   var expertGroupHTML = expertGroupHTML.replace("<EXPERT_GROUP_TITLE>", expertGroupName); 
@@ -83,5 +83,102 @@ function addExpertGroup(obj) {
   numSubgroups += 1;
   
   document.getElementById("expertGroup-section").innerHTML += expertGroupHTML; 
+  
+}
+
+function getExpertGroups() {
+  var groupDivs = document.getElementsByClassName("expertGroup-container"); 
+  groupDivs = Array.prototype.slice.call(groupDivs); 
+  
+  var groups = []; 
+  groupDivs.forEach(function(elem) {
+    var title = $(elem).find(".expertGroup-title").text();
+    
+    var contents = $(elem).find(".content-div");
+    var carray = contents.toArray();
+    contentArray =[];
+    carray.forEach(function(elem) {
+      var inner = elem.innerText; 
+      var splitInner = inner.split(":"); 
+      var name = splitInner[0].trim();
+      var lexile = splitInner[1].trim(); 
+      var obj = {name:name, lexile:lexile}; 
+      contentArray.push(obj);    
+    });
+    
+    expertGroup = {title:title, contents:contentArray};
+    groups.push(expertGroup);
+  });
+  return groups; 
+}
+
+var LEXILE_BUFFER = 100; 
+
+function startSorting() {
+  var groups = getExpertGroups(); 
+  var students = getStudents();
+  var studentGroups = []; 
+  
+  // Determine max number of students per group. 
+  var groupMax = Math.ceil(students.length / groups.length); 
+  console.log(groupMax); 
+  
+  for (var j=0; j<groups.length; j++) {
+    studentGroups.push([]); 
+  }
+  
+
+  //determine max and min lexile levels
+  groups.forEach(function(group) {
+    var allContent = group.contents; 
+    var max = 0; 
+    var min = 2000; 
+    for (var i=0; i<allContent.length; i++) {
+      var con = allContent[i]; 
+      if (con.lexile > max) {
+        max = con.lexile; 
+      } 
+      if (con.lexile < min) {
+        min = con.lexile; 
+      }
+    }
+    group.max = max; 
+    group.min = min; 
+  });
+  
+  //split students into groups 
+  students.forEach(function (student) {
+    // Attempt to randomly assign to a group that works
+    maxAttempts = groups.length * 3; 
+    for (var attempt=0; attempt<maxAttempts; attempt++) {
+      var randomIndex = Math.floor(Math.random()*groups.length); 
+      var group = groups[randomIndex];
+      
+      if (student.lexile >= (group.lexile-LEXILE_BUFFER)) {
+          if (studentGroups[randomIndex].length < groupMax) {
+            studentGroups[randomIndex].push(student); 
+            break;
+          }
+      }
+      
+      //If we couldn't do it randomly...
+      if (attempt = maxAttempts-1) {
+        for (var i=0; i<groups.length; i++) {
+          if (studentGroups[i].length < groupMax) {
+            studentGroups[i].push(student); 
+            break;
+          }
+        }
+      }
+    }
+  }); 
+  
+  displayGroups({groups:groups, studentGroups:studentGroups}) 
+}
+
+function displayGroups(obj) {
+  var groups = obj.groups; 
+  var studentGroups = obj.studentGroups; 
+  
   
 }

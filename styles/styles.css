@@ -6,3 +6,11 @@
 .box-title {
   font-size: 22px;
 }
+.expertGroup-container {
+  padding: 10px;
+}
+
+
+#sort-button {
+  float: right;
+}
