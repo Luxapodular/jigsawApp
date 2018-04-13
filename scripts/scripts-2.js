@@ -11,9 +11,10 @@ function getStudents() {
   studentsAttached.forEach(function(elem){
     var splitElem = elem.split(":"); 
     var name = splitElem[0].trim(); 
-    var lexile = splitElem[1].trim(); 
+    var lexile = parseInt(splitElem[1].trim()); 
     students.push({name:name, lexile:lexile}); 
   }); 
+  
   return students; 
 }
 

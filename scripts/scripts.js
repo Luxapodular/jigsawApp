@@ -1,10 +1,6 @@
 var numSubgroups = 1;
 var numContent = 1; 
 
-function getStudents() {
-  var students = $("textarea#students").val();
-}
-
 function addContent(obj) {
   callerId = obj.id; 
 
@@ -101,7 +97,7 @@ function getExpertGroups() {
       var inner = elem.innerText; 
       var splitInner = inner.split(":"); 
       var name = splitInner[0].trim();
-      var lexile = splitInner[1].trim(); 
+      var lexile = parseInt(splitInner[1].trim()); 
       var obj = {name:name, lexile:lexile}; 
       contentArray.push(obj);    
     });
@@ -120,8 +116,7 @@ function startSorting() {
   var studentGroups = []; 
   
   // Determine max number of students per group. 
-  var groupMax = Math.ceil(students.length / groups.length); 
-  console.log(groupMax); 
+  var groupMax = Math.ceil(students.length / groups.length);  
   
   for (var j=0; j<groups.length; j++) {
     studentGroups.push([]); 
@@ -131,10 +126,12 @@ function startSorting() {
   //determine max and min lexile levels
   groups.forEach(function(group) {
     var allContent = group.contents; 
+    console.log(group);
     var max = 0; 
     var min = 2000; 
     for (var i=0; i<allContent.length; i++) {
       var con = allContent[i]; 
+      console.log(con);
       if (con.lexile > max) {
         max = con.lexile; 
       } 
@@ -151,10 +148,13 @@ function startSorting() {
     // Attempt to randomly assign to a group that works
     maxAttempts = groups.length * 3; 
     for (var attempt=0; attempt<maxAttempts; attempt++) {
-      var randomIndex = Math.floor(Math.random()*groups.length); 
+      var randomIndex = Math.floor(Math.random()*groups.length);
+      console.log(randomIndex); 
       var group = groups[randomIndex];
+      console.log(student.lexile);
+      console.log(group.max);
       
-      if (student.lexile >= (group.lexile-LEXILE_BUFFER)) {
+      if (student.lexile >= (group.max-LEXILE_BUFFER)) {
           if (studentGroups[randomIndex].length < groupMax) {
             studentGroups[randomIndex].push(student); 
             break;
@@ -163,6 +163,7 @@ function startSorting() {
       
       //If we couldn't do it randomly...
       if (attempt = maxAttempts-1) {
+        console.log("Max Attempts"); 
         for (var i=0; i<groups.length; i++) {
           if (studentGroups[i].length < groupMax) {
             studentGroups[i].push(student); 
@@ -179,6 +180,6 @@ function startSorting() {
 function displayGroups(obj) {
   var groups = obj.groups; 
   var studentGroups = obj.studentGroups; 
-  
-  
+  console.log(studentGroups);
+  return studentGroups;
 }
