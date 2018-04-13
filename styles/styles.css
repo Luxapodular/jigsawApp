@@ -14,3 +14,34 @@
 #sort-button {
   float: right;
 }
+
+#header-text {
+  font-size: 18px; 
+  padding: 10px;
+}
+
+#instructions {
+  font-size: 14px; 
+  padding: 10px;
+}
+
+.student-warning-high {
+  color: blueviolet; 
+}
+
+.student-warning-low {
+  color: indianred;
+}
+
+.infoBar {
+  font-size: 14px;
+}
+
+.student-list {
+  font-size: 22px;
+}
+
+.student-list-item {
+  font-size: 14px;
+  font-weight: bold;
+}

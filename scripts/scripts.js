@@ -45,6 +45,8 @@ function addContent(obj) {
   
   $("#"+containerId).append(contentDiv); 
   
+  $("#"+nameId).val(""); 
+  $("#"+levelId).val(""); 
   numContent += 1; 
 
 }
@@ -146,7 +148,7 @@ function startSorting() {
   //split students into groups 
   students.forEach(function (student) {
     // Attempt to randomly assign to a group that works
-    maxAttempts = groups.length * 3; 
+    maxAttempts = groups.length * 2; 
     for (var attempt=0; attempt<maxAttempts; attempt++) {
       var randomIndex = Math.floor(Math.random()*groups.length);
       console.log(randomIndex); 
@@ -179,7 +181,40 @@ function startSorting() {
 
 function displayGroups(obj) {
   var groups = obj.groups; 
-  var studentGroups = obj.studentGroups; 
-  console.log(studentGroups);
-  return studentGroups;
+  var studentGroups = obj.studentGroups;
+  document.getElementById("group-container").innerHTML = "Sorted Expert Groups";
+  
+  
+  studentGroups.forEach(function (group) {
+    var groupIndex = studentGroups.indexOf(group);
+    var g = groups[groupIndex]; 
+    var sList = document.createElement('ul');
+    sList.innerText=g.title; 
+    var infoBar = document.createElement('div');
+    infoBar.className = "infoBar"; 
+    infoBar.innerText = " (max lexile: "+g.max+" | min lexile: "+g.min +")";
+    
+    sList.appendChild(infoBar); 
+    sList.className="student-list"; 
+    group.forEach(function(student) {
+      var sBullet = document.createElement("li"); 
+      sBullet.innerText = student.name+":"+student.lexile; 
+      sBullet.className="student-list-item";
+      if (student.lexile > (g.max + LEXILE_BUFFER)) {
+        var warning = document.createElement('div'); 
+        warning.className = " student-warning-high"
+        warning.innerText += " <! Need Higher Content !>"
+        sBullet.appendChild(warning);
+      }
+      
+      if (student.lexile < (g.max - LEXILE_BUFFER)) {
+        var warning = document.createElement('div'); 
+        warning.className = " student-warning-low"
+        warning.innerText += " <! Need Lower Content !>"
+        sBullet.appendChild(warning);
+      }
+      sList.appendChild(sBullet); 
+    });
+    document.getElementById("group-container").appendChild(sList); 
+  }); 
 }
