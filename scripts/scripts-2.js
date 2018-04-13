@@ -1,25 +1,44 @@
+function getStudents() {
+  var studentDivs = document.getElementsByClassName("student-div"); 
+  studentDivs = Array.prototype.slice.call(studentDivs); 
+
+  studentsAttached = []
+  studentDivs.forEach(function (div) {
+    studentsAttached.push(div.innerText); 
+  });
+  
+  var students = []
+  studentsAttached.forEach(function(elem){
+    var splitElem = elem.split(":"); 
+    var name = splitElem[0].trim(); 
+    var lexile = splitElem[1].trim(); 
+    students.push({name:name, lexile:lexile}); 
+  }); 
+  return students; 
+}
+
 function getStudentsAlternate() {
   var students = $("textarea#students").val();
 
   var studentList = students.split(","); 
   
   for (var i=0; i<studentList.length; i++) {
-    var trimmedStudent = studentList[i].trim();
-    console.log(trimmedStudent);    
+    var trimmedStudent = studentList[i].trim();   
   }
 }
 
 studentNum = 1; 
 function addStudent() {
-   console.log("hello")
    var nameInput = document.getElementById("studentNameInput");
     var nameInputValue = nameInput.value;
-   console.log(nameInputValue);
    var studentLexileInput = document.getElementById("studentLexileInput");
     var studentLexileValue = studentLexileInput.value;
-    console.log(studentLexileValue);
     if (nameInputValue == "") {
-        alert("Please enter a Student")
+      alert("Please enter a name for the Student.")
+      return; 
+    } else if (studentLexileValue == "" || !$.isNumeric(studentLexileValue)){
+      alert("Please enter a Lexile level for the student.")
+      return;
     } else {
         studentList=document.getElementById("student-list");
       
@@ -27,13 +46,12 @@ function addStudent() {
         studentDiv.id="student-div-"+studentNum
         studentDiv.className = "student-div";
         studentDiv.innerHTML = nameInputValue + ": " + studentLexileValue;
-        console.log(studentDiv);
         studentList.appendChild(studentDiv);
-        console.log(studentList);
         
         var delButton = document.createElement('button');
         delButton.id = "student-delete-button-" + studentNum; 
         delButton.className="content-delete-button";
+        delButton.innerText = "-"; 
         studentDiv.appendChild(delButton);
         delButton.onclick= deleteStudent; 
       

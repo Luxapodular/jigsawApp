@@ -29,7 +29,7 @@ function addContent(obj) {
     return;
   } 
   
-  if (!String(level).matches("[0-9+]")) {
+  if (!$.isNumeric(level)) {
     alert("Levels can only be numbers! [0-1300]"); 
     return;
   }
